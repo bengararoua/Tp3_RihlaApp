@@ -4,3 +4,5 @@ Question3->La différence entre cs.primary et Colors.teal est que cs.primary dé
 Question4->On ne voit plus le dégradé ni l'image car le DecoratedBox est dessiné en premier, donc il se retrouve caché derrière l'image qui est dessinée par-dessus.
 Question5-> l'image et le dégradé deviennent rectangulaires et débordent sur les coins
 Question6->Pour réserver l'espace à droite du texte
+Question7->Le Spacer a besoin de connaître la largeur disponible pour pousser le prix à droite.
+Question8->il suffit d'ajouter une nouvelle Destination(...) dans lib/data/destinations.dart, et la boucle for du HomeScreen l'affichera toute seule.
