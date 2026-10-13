@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
- 
+import 'package:rihla/widgets/home_header.dart';
+import 'package:rihla/widgets/search_box.dart'; 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
  
@@ -10,7 +11,9 @@ class HomeScreen extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: [
-            const Text('Rihla arrive bientôt…'),
+             const HomeHeader(prenom: 'Roua') ,
+             const SizedBox(height: 20),
+             const SearchBox()
           ],
         ),
       ),
