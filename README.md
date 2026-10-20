@@ -6,3 +6,6 @@ Question5-> l'image et le dégradé deviennent rectangulaires et débordent sur 
 Question6->Pour réserver l'espace à droite du texte
 Question7->Le Spacer a besoin de connaître la largeur disponible pour pousser le prix à droite.
 Question8->il suffit d'ajouter une nouvelle Destination(...) dans lib/data/destinations.dart, et la boucle for du HomeScreen l'affichera toute seule.
+Question9->Sans setState, l’écran reste inchangé mais la valeur se change en mémoire
+Question10->Un getter est recalculé à chaque build(), ce qui garantit que la liste affichée correspond toujours à la valeur actuelle de _categorie, alors qu’une variable stockée devrait être mise à jour manuellement et risquerait de se désynchroniser.
+Question11->HeroBanner reçoit sa destination en paramètre et n’a aucun état propre qui change, donc c’est HomeScreen qui est reconstruit et qui le recrée simplement à l’identique.
