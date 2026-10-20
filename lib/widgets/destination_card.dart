@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rihla/widgets/favorite_button.dart';
 import '../models/destination.dart';
 
 class DestinationCard extends StatelessWidget {
@@ -42,6 +43,7 @@ class DestinationCard extends StatelessWidget {
                       Text(destination.note.toString()),
                       const Spacer(),
                       Text('${destination.prix} DT'),
+                      const FavoriteButton(),
                     ],
                   ),
                 ],

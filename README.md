@@ -9,3 +9,5 @@ Question8->il suffit d'ajouter une nouvelle Destination(...) dans lib/data/desti
 Question9->Sans setState, l’écran reste inchangé mais la valeur se change en mémoire
 Question10->Un getter est recalculé à chaque build(), ce qui garantit que la liste affichée correspond toujours à la valeur actuelle de _categorie, alors qu’une variable stockée devrait être mise à jour manuellement et risquerait de se désynchroniser.
 Question11->HeroBanner reçoit sa destination en paramètre et n’a aucun état propre qui change, donc c’est HomeScreen qui est reconstruit et qui le recrée simplement à l’identique.
+Question1:Palier6->en mettant en favori et puis filtrer et renver à tout ,le coeur est non sur la bonne carte
+Question2:Palier6->le cœur reste sur la bonne carte, car la clé identifie chaque carte par son nom et Flutter réattache donc le bon State  à la bonne destination, quelle que soit sa position dans la liste filtrée.
