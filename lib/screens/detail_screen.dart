@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rihla/models/destination.dart';
 import 'package:rihla/screens/reservation_screen.dart';
 import 'package:rihla/widgets/favorite_button.dart';
-
+import 'package:rihla/models/reservation.dart';
 class DetailScreen extends StatefulWidget {
   final Destination destination;
   const DetailScreen({super.key, required this.destination});
@@ -13,7 +13,49 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   int _voyageurs = 1;
+Future<void> _reserver() async {
+  final reservation = await Navigator.push<Reservation>(
+    context,
+    MaterialPageRoute(
+      builder: (context) => ReservationScreen(
+        destination: widget.destination,
+        voyageurs: _voyageurs,
+      ),
+    ),
+  );
 
+  // TODO 3 : si aucune réservation n'est renvoyée, arrêter
+  if (reservation == null) return;
+
+  // TODO 4 : vérifier que DetailScreen est toujours affiché
+  if (!mounted) return;
+
+  await showDialog<void>(
+    context: context,
+    builder: (context) => AlertDialog(
+      icon: const Icon(
+        Icons.check_circle,
+        color: Colors.green,
+        size: 48,
+      ),
+      title: const Text('Réservation confirmée'),
+      content: Text(
+        'Nom : ${reservation.nom}\n'
+        'Destination : ${reservation.destination.nom}\n'
+        'Voyageurs : ${reservation.voyageurs}\n'
+        'Formule : ${reservation.formule}\n'
+        'Total : ${reservation.total} DT\n'
+        'E-mail : ${reservation.email}',
+      ),
+      actions: [
+        FilledButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Parfait'),
+        ),
+      ],
+    ),
+  );
+}
   @override
   Widget build(BuildContext context) {
     final d = widget.destination;
@@ -197,16 +239,9 @@ class _DetailScreenState extends State<DetailScreen> {
               const SizedBox(width: 20),
               Expanded(
                 child: FilledButton(
-                  onPressed: () {      Navigator.push(context,
-        MaterialPageRoute(
-          builder: (context) => ReservationScreen(
-            destination: d,
-            voyageurs: _voyageurs,
-          ),
-        ),
-      );},
-                  child: const Text('Réserver'),
-                ),
+  onPressed: _reserver,
+  child: const Text('Réserver'),
+),
               ),
             ],
           ),

@@ -17,3 +17,8 @@ Question3/tp4:l'effet d'encre (InkWell) peut dépasser les coins arrondis de la 
 Question1/palier3/tp4:_formKey.currentState!.validate() vérifie tous les champs du formulaire et renvoie true si tous sont valides, sinon false.
 Question2/palier3/tp4:inputFormatters filtrent la saisie pendant que l'utilisateur tape, tandis que validator vérifie la valeur saisie lors de la validation du formulaire.
 Question3/palier3/tp4:dispose() libère les ressources des contrôleurs.
+Question1/palier4/tp4:empêche la saisie manuelle de la date et oblige l'utilisateur à la choisir via le calendrier
+Question2/palier4/tp4:_total est un getter calculé automatiquement à partir de _formule et du nombre de voyageurs, donc sa valeur est recalculée à chaque lecture après un setState.
+Question1/palier5/tp4:null
+Question2/palier5/tp4:VS Code affiche "Don't use BuildContext across async gaps".->Il signifie que le widget peut ne plus être affiché après await.
+Question3/palier5/tp4:Une boîte de dialogue est aussi une route dans la pile de navigation ; 
