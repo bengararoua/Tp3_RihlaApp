@@ -14,3 +14,6 @@ Question2:Palier6->le cœur reste sur la bonne carte, car la clé identifie chaq
 Question1/tp4:Oui, le filtre est conservé, car Navigator.pop() dépile DetailScreen et revient à l'écran précédent sans le recréer
 Question2/tp4:DetailScreen reçoit la destination via son constructeur grâce au mécanisme de passage de paramètres entre widgets.
 Question3/tp4:l'effet d'encre (InkWell) peut dépasser les coins arrondis de la carte.
+Question1/palier3/tp4:_formKey.currentState!.validate() vérifie tous les champs du formulaire et renvoie true si tous sont valides, sinon false.
+Question2/palier3/tp4:inputFormatters filtrent la saisie pendant que l'utilisateur tape, tandis que validator vérifie la valeur saisie lors de la validation du formulaire.
+Question3/palier3/tp4:dispose() libère les ressources des contrôleurs.

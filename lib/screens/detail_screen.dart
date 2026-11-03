@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rihla/models/destination.dart';
+import 'package:rihla/screens/reservation_screen.dart';
 import 'package:rihla/widgets/favorite_button.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -196,7 +197,14 @@ class _DetailScreenState extends State<DetailScreen> {
               const SizedBox(width: 20),
               Expanded(
                 child: FilledButton(
-                  onPressed: () {},
+                  onPressed: () {      Navigator.push(context,
+        MaterialPageRoute(
+          builder: (context) => ReservationScreen(
+            destination: d,
+            voyageurs: _voyageurs,
+          ),
+        ),
+      );},
                   child: const Text('Réserver'),
                 ),
               ),
