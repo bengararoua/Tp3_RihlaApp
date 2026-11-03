@@ -70,7 +70,13 @@ Future<void> _reserver() async {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                Image.asset(d.image, fit: BoxFit.cover),
+               Hero(
+  tag: 'image-${d.nom}',
+  child: Image.asset(
+    d.image,
+    fit: BoxFit.cover,
+  ),
+),
                 Positioned(
                   top: 40,
                   left: 16,
