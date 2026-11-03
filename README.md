@@ -11,3 +11,6 @@ Question10->Un getter est recalculé à chaque build(), ce qui garantit que la l
 Question11->HeroBanner reçoit sa destination en paramètre et n’a aucun état propre qui change, donc c’est HomeScreen qui est reconstruit et qui le recrée simplement à l’identique.
 Question1:Palier6->en mettant en favori et puis filtrer et renver à tout ,le coeur est non sur la bonne carte
 Question2:Palier6->le cœur reste sur la bonne carte, car la clé identifie chaque carte par son nom et Flutter réattache donc le bon State  à la bonne destination, quelle que soit sa position dans la liste filtrée.
+Question1/tp4:Oui, le filtre est conservé, car Navigator.pop() dépile DetailScreen et revient à l'écran précédent sans le recréer
+Question2/tp4:DetailScreen reçoit la destination via son constructeur grâce au mécanisme de passage de paramètres entre widgets.
+Question3/tp4:l'effet d'encre (InkWell) peut dépasser les coins arrondis de la carte.

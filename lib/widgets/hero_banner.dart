@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rihla/screens/detail_screen.dart';
 import '../models/destination.dart';
  
 class HeroBanner extends StatelessWidget {
@@ -82,14 +83,23 @@ class HeroBanner extends StatelessWidget {
                 ],
               ),
             ),
-            Positioned(
-              right: 16,
-              bottom: 20,
-              child: FilledButton(
-                onPressed: () {},
-                child: const Text('Découvrir'),
-              ),
-            ),
+Positioned(
+  right: 16,
+  bottom: 20,
+  child: FilledButton(
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DetailScreen(
+            destination: destination,
+          ),
+        ),
+      );
+    },
+    child: const Text('Découvrir'),
+  ),
+),
           ],
         ),
       ),
