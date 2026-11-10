@@ -25,3 +25,9 @@ Question3/palier5/tp4:Une boîte de dialogue est aussi une route dans la pile de
 Question1/palier0/tp5:le code 404 appartient à la famille des erreurs clients
 Question2/palier0/tp5:Le serveur
 Question3/palier0/tp5:La méthode GET n'a pas de corps car elle récupère une ressource existante contrairement au POST qui envoie des données dans son corps pour créer une nouvelle ressource.
+Question1/palier2/tp5:fromJson est un constructeur nommé factory parce qu'il sert à fabriquer une instance à partir de données JSON, sans être obligé de créer directement cette instance lui-même.
+Question2/palier2/tp5:cela provoquera une erreur car le modèle s'attend à un entier et non à une chaîne de caractères.
+Question3/palier2/tp5: car la récupération des données sur le réseau est une opération asynchrone.
+Question1/palier3/tp5:On déclare _futurDestinations avec late car sa valeur est initialisée un peu plus tard
+Question2/palier3/tp5:Sans le test snapshot.hasError, l'application provoquerait un plantage ou une erreur
+Question3/palier3/tp5:Non, le changement de catégorie ne déclenche pas de nouvelle requête au serveur car le filtrage s'effectue localement sur la liste déjà récupérée en mémoire.
