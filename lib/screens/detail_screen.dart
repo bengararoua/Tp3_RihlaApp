@@ -3,6 +3,9 @@ import 'package:rihla/models/destination.dart';
 import 'package:rihla/screens/reservation_screen.dart';
 import 'package:rihla/widgets/favorite_button.dart';
 import 'package:rihla/models/reservation.dart';
+import 'package:rihla/models/avis.dart';
+import 'package:rihla/screens/avis_screen.dart';
+
 class DetailScreen extends StatefulWidget {
   final Destination destination;
   const DetailScreen({super.key, required this.destination});
@@ -13,6 +16,8 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   int _voyageurs = 1;
+   final List<Avis> _avis = [];
+
 Future<void> _reserver() async {
   final reservation = await Navigator.push<Reservation>(
     context,
@@ -56,6 +61,22 @@ Future<void> _reserver() async {
     ),
   );
 }
+
+Future<void> _laisserAvis() async {
+  final avis = await Navigator.push<Avis>(
+    context,
+    MaterialPageRoute(
+      builder: (_) => AvisScreen(destination: widget.destination),
+    ),
+  );
+  if (avis == null || !mounted) return;
+
+  setState(() => _avis.insert(0, avis));
+  ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(content: Text('Merci pour votre avis !')),
+  );
+}
+
   @override
   Widget build(BuildContext context) {
     final d = widget.destination;
@@ -220,6 +241,38 @@ Future<void> _reserver() async {
                     ),
                   ],
                 ),
+const SizedBox(height: 24),
+Row(
+  children: [
+    Expanded(
+      child: Text('Avis (${_avis.length})',
+          style: const TextStyle(
+              fontSize: 18, fontWeight: FontWeight.bold)),
+    ),
+    TextButton.icon(
+      onPressed: _laisserAvis,
+      icon: const Icon(Icons.rate_review_outlined),
+      label: const Text('Laisser un avis'),
+    ),
+  ],
+),
+if (_avis.isEmpty)
+  const Text('Soyez le premier à donner votre avis.')
+else
+  for (final a in _avis)
+    ListTile(
+      contentPadding: EdgeInsets.zero,
+      leading: CircleAvatar(child: Text(a.auteur[0].toUpperCase())),
+      title: Row(
+        children: [
+          Expanded(child: Text(a.auteur)),
+          for (int i = 1; i <= 5; i++)
+            Icon(i <= a.note ? Icons.star : Icons.star_border,
+                color: Colors.amber, size: 16),
+        ],
+      ),
+      subtitle: Text(a.commentaire),
+    ),
               ],
             ),
           ),

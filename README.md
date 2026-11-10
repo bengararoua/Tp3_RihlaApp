@@ -22,3 +22,6 @@ Question2/palier4/tp4:_total est un getter calculé automatiquement à partir de
 Question1/palier5/tp4:null
 Question2/palier5/tp4:VS Code affiche "Don't use BuildContext across async gaps".->Il signifie que le widget peut ne plus être affiché après await.
 Question3/palier5/tp4:Une boîte de dialogue est aussi une route dans la pile de navigation ; 
+Question1/palier0/tp5:le code 404 appartient à la famille des erreurs clients
+Question2/palier0/tp5:Le serveur
+Question3/palier0/tp5:La méthode GET n'a pas de corps car elle récupère une ressource existante contrairement au POST qui envoie des données dans son corps pour créer une nouvelle ressource.
