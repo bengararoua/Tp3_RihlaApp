@@ -31,3 +31,6 @@ Question3/palier2/tp5: car la récupération des données sur le réseau est une
 Question1/palier3/tp5:On déclare _futurDestinations avec late car sa valeur est initialisée un peu plus tard
 Question2/palier3/tp5:Sans le test snapshot.hasError, l'application provoquerait un plantage ou une erreur
 Question3/palier3/tp5:Non, le changement de catégorie ne déclenche pas de nouvelle requête au serveur car le filtrage s'effectue localement sur la liste déjà récupérée en mémoire.
+Question1/palier4/tp5:On envoie uniquement l'identifiant pour alléger la charge réseau
+Question2/palier4/tp5:Le serveur risque de ne pas comprendre le format des données envoyées et renverra une erreur
+Question3/palier4/tp5:on teste mounted après un await pour vérifier que le widget existe toujours avant d'utiliser son BuildContext ou de modifier son état.

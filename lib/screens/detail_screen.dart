@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rihla/models/destination.dart';
 import 'package:rihla/screens/reservation_screen.dart';
+import 'package:rihla/services/api_service.dart';
 import 'package:rihla/widgets/favorite_button.dart';
 import 'package:rihla/models/reservation.dart';
 import 'package:rihla/models/avis.dart';
@@ -35,6 +36,24 @@ Future<void> _reserver() async {
   // TODO 4 : vérifier que DetailScreen est toujours affiché
   if (!mounted) return;
 
+  final String id;
+  try {
+    // TODO 5 : appeler ApiService.creerReservation (sans oublier await)
+    id = await ApiService.creerReservation(reservation);
+  } catch (e) {
+    if (!mounted) return;
+    // TODO 6 : SnackBar rouge + Envoi impossible : json-server est-il lancé ?
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('Envoi impossible : json-server est-il lancé ?'),
+        backgroundColor: Theme.of(context).colorScheme.error,
+      ),
+    );
+    return; // pas de confirmation si rien n'est enregistré
+  }
+
+  if (!mounted) return;
+
   await showDialog<void>(
     context: context,
     builder: (context) => AlertDialog(
@@ -45,6 +64,7 @@ Future<void> _reserver() async {
       ),
       title: const Text('Réservation confirmée'),
       content: Text(
+        'N° de réservation : $id\n'
         'Nom : ${reservation.nom}\n'
         'Destination : ${reservation.destination.nom}\n'
         'Voyageurs : ${reservation.voyageurs}\n'
@@ -76,6 +96,7 @@ Future<void> _laisserAvis() async {
     const SnackBar(content: Text('Merci pour votre avis !')),
   );
 }
+
 
   @override
   Widget build(BuildContext context) {

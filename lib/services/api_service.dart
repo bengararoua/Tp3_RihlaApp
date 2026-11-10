@@ -1,6 +1,7 @@
 import 'dart:convert';
  
 import 'package:http/http.dart' as http;
+import 'package:rihla/models/reservation.dart';
  
 import '../config/api_config.dart';
 import '../models/destination.dart';
@@ -25,4 +26,23 @@ class ApiService {
     //          (map + Destination.fromJson + toList)
     return liste.map((item) => Destination.fromJson(item)).toList();
   }
+  static Future<String> creerReservation(Reservation reservation) async {
+  final reponse = await http
+      .post(
+        _url('/reservations'),
+        headers: {'Content-Type': 'application/json'},
+        body: // TODO 3 : encoder reservation.toJson() en texte JSON
+          jsonEncode(reservation.toJson()),
+      )
+      .timeout(ApiConfig.timeout);
+ 
+  // TODO 4 : si le code n'est pas 201, lancer une Exception
+  if (reponse.statusCode != 201) {
+    throw Exception('Erreur de création de destinations (Code : ${reponse.statusCode})');
+  }
+ 
+  final Map<String, dynamic> creee = jsonDecode(utf8.decode(reponse.bodyBytes));
+  return creee['id'].toString();   // l'id attribué par le serveur
+}
+
 }
