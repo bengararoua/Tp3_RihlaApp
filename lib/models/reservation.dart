@@ -21,6 +21,19 @@ class Reservation {
     required this.formule,
   });
 
+  factory Reservation.fromJson(Map<String, dynamic> json) {
+    return Reservation(
+      id: json['id'],
+      destination: Destination.fromJson(json['destination']),
+      nom: json['nom'],
+      email: json['email'] ?? '',
+      telephone: json['telephone'] ?? '',
+      dateDepart: DateTime.parse(json['dateDepart']),
+      voyageurs: json['voyageurs'],
+      formule: json['formule'],
+    );
+  }
+
   // Formule Confort : +30 % sur le prix par personne.
   int get prixParPersonne => formule == 'Confort'
       ? (destination.prix * 1.3).round()

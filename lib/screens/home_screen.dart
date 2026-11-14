@@ -7,6 +7,7 @@ import 'package:rihla/widgets/home_header.dart';
 import 'package:rihla/widgets/search_box.dart';
 import 'package:rihla/widgets/section_title.dart';
 import '../services/api_service.dart';
+import 'mes_reservations_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -37,13 +38,13 @@ class _HomeScreenState extends State<HomeScreen> {
       future: _futurDestinations,
       builder: (context, snapshot) {
         // TODO 2 : en attente (waiting) et pas encore de données
-        //             -> CircularProgressIndicator centré
+        //            -> CircularProgressIndicator centré
         if (snapshot.connectionState == ConnectionState.waiting &&
             !snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
         }
         // TODO 3 : erreur (snapshot.hasError) -> ErreurReseau(...)
-  
+ 
         if (snapshot.hasError) {
           return ErreurReseau(
             message: 'Impossible de charger les destinations.',
@@ -120,7 +121,9 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: _onglet == 0
             ? _construireExplorer()
-            : const Center(child: Text('Bientôt disponible')),
+            : _onglet == 2
+                ? const MesReservationsScreen()
+                : const Center(child: Text('Bientôt disponible')),
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _onglet,
@@ -141,9 +144,9 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Favoris',
           ),
           NavigationDestination(
-            icon: Icon(Icons.person_outline),
-            selectedIcon: Icon(Icons.person),
-            label: 'Profil',
+            icon: Icon(Icons.luggage_outlined),
+            selectedIcon: Icon(Icons.luggage),
+            label: 'Voyages',
           ),
         ],
       ),

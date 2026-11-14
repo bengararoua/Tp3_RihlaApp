@@ -16,9 +16,9 @@ class ApiService {
  
     // TODO 4 : si statusCode n'est pas 200, lancer une Exception
     //          avec un message contenant le code
- if (reponse.statusCode != 200) {
-    throw Exception('Erreur de chargement des destinations (Code : ${reponse.statusCode})');
-  }
+    if (reponse.statusCode != 200) {
+      throw Exception('Erreur de chargement des destinations (Code : ${reponse.statusCode})');
+    }
     // utf8.decode garde les accents (Médenine, Désert...)
     final List<dynamic> liste = jsonDecode(utf8.decode(reponse.bodyBytes));
  
@@ -26,8 +26,22 @@ class ApiService {
     //          (map + Destination.fromJson + toList)
     return liste.map((item) => Destination.fromJson(item)).toList();
   }
+
+  static Future<List<Reservation>> getReservations() async {
+    final reponse = await http
+        .get(_url('/reservations?_embed=destination'))
+        .timeout(ApiConfig.timeout);
+
+    if (reponse.statusCode != 200) {
+      throw Exception('Erreur de chargement des réservations (Code : ${reponse.statusCode})');
+    }
+
+    final List<dynamic> liste = jsonDecode(utf8.decode(reponse.bodyBytes));
+    return liste.map((item) => Reservation.fromJson(item)).toList();
+  }
+
   static Future<String> creerReservation(Reservation reservation) async {
-  final reponse = await http
+    final reponse = await http
       .post(
         _url('/reservations'),
         headers: {'Content-Type': 'application/json'},
@@ -36,13 +50,12 @@ class ApiService {
       )
       .timeout(ApiConfig.timeout);
  
-  // TODO 4 : si le code n'est pas 201, lancer une Exception
-  if (reponse.statusCode != 201) {
-    throw Exception('Erreur de création de destinations (Code : ${reponse.statusCode})');
-  }
+    // TODO 4 : si le code n'est pas 201, lancer une Exception
+    if (reponse.statusCode != 201) {
+      throw Exception('Erreur de création de destinations (Code : ${reponse.statusCode})');
+    }
  
-  final Map<String, dynamic> creee = jsonDecode(utf8.decode(reponse.bodyBytes));
-  return creee['id'].toString();   // l'id attribué par le serveur
-}
-
+    final Map<String, dynamic> creee = jsonDecode(utf8.decode(reponse.bodyBytes));
+    return creee['id'].toString();   // l'id attribué par le serveur
+  }
 }

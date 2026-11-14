@@ -17,86 +17,85 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   int _voyageurs = 1;
-   final List<Avis> _avis = [];
+  final List<Avis> _avis = [];
 
-Future<void> _reserver() async {
-  final reservation = await Navigator.push<Reservation>(
-    context,
-    MaterialPageRoute(
-      builder: (context) => ReservationScreen(
-        destination: widget.destination,
-        voyageurs: _voyageurs,
-      ),
-    ),
-  );
-
-  // TODO 3 : si aucune réservation n'est renvoyée, arrêter
-  if (reservation == null) return;
-
-  // TODO 4 : vérifier que DetailScreen est toujours affiché
-  if (!mounted) return;
-
-  final String id;
-  try {
-    // TODO 5 : appeler ApiService.creerReservation (sans oublier await)
-    id = await ApiService.creerReservation(reservation);
-  } catch (e) {
-    if (!mounted) return;
-    // TODO 6 : SnackBar rouge + Envoi impossible : json-server est-il lancé ?
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text('Envoi impossible : json-server est-il lancé ?'),
-        backgroundColor: Theme.of(context).colorScheme.error,
+  Future<void> _reserver() async {
+    final reservation = await Navigator.push<Reservation>(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ReservationScreen(
+          destination: widget.destination,
+          voyageurs: _voyageurs,
+        ),
       ),
     );
-    return; // pas de confirmation si rien n'est enregistré
+
+    // TODO 3 : si aucune réservation n'est renvoyée, arrêter
+    if (reservation == null) return;
+
+    // TODO 4 : vérifier que DetailScreen est toujours affiché
+    if (!mounted) return;
+
+    final String id;
+    try {
+      // TODO 5 : appeler ApiService.creerReservation (sans oublier await)
+      id = await ApiService.creerReservation(reservation);
+    } catch (e) {
+      if (!mounted) return;
+      // TODO 6 : SnackBar rouge + Envoi impossible : json-server est-il lancé ?
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Envoi impossible : json-server est-il lancé ?'),
+          backgroundColor: Theme.of(context).colorScheme.error,
+        ),
+      );
+      return; // pas de confirmation si rien n'est enregistré
+    }
+
+    if (!mounted) return;
+
+    await showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        icon: const Icon(
+          Icons.check_circle,
+          color: Colors.green,
+          size: 48,
+        ),
+        title: const Text('Réservation confirmée'),
+        content: Text(
+          'N° de réservation : $id\n'
+          'Nom : ${reservation.nom}\n'
+          'Destination : ${reservation.destination.nom}\n'
+          'Voyageurs : ${reservation.voyageurs}\n'
+          'Formule : ${reservation.formule}\n'
+          'Total : ${reservation.total} DT\n'
+          'E-mail : ${reservation.email}',
+        ),
+        actions: [
+          FilledButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Parfait'),
+          ),
+        ],
+      ),
+    );
   }
 
-  if (!mounted) return;
-
-  await showDialog<void>(
-    context: context,
-    builder: (context) => AlertDialog(
-      icon: const Icon(
-        Icons.check_circle,
-        color: Colors.green,
-        size: 48,
+  Future<void> _laisserAvis() async {
+    final avis = await Navigator.push<Avis>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => AvisScreen(destination: widget.destination),
       ),
-      title: const Text('Réservation confirmée'),
-      content: Text(
-        'N° de réservation : $id\n'
-        'Nom : ${reservation.nom}\n'
-        'Destination : ${reservation.destination.nom}\n'
-        'Voyageurs : ${reservation.voyageurs}\n'
-        'Formule : ${reservation.formule}\n'
-        'Total : ${reservation.total} DT\n'
-        'E-mail : ${reservation.email}',
-      ),
-      actions: [
-        FilledButton(
-          onPressed: () => Navigator.pop(context),
-          child: const Text('Parfait'),
-        ),
-      ],
-    ),
-  );
-}
+    );
+    if (avis == null || !mounted) return;
 
-Future<void> _laisserAvis() async {
-  final avis = await Navigator.push<Avis>(
-    context,
-    MaterialPageRoute(
-      builder: (_) => AvisScreen(destination: widget.destination),
-    ),
-  );
-  if (avis == null || !mounted) return;
-
-  setState(() => _avis.insert(0, avis));
-  ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(content: Text('Merci pour votre avis !')),
-  );
-}
-
+    setState(() => _avis.insert(0, avis));
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Merci pour votre avis !')),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,23 +111,23 @@ Future<void> _laisserAvis() async {
             child: Stack(
               fit: StackFit.expand,
               children: [
-               Hero(
-  tag: 'image-${d.nom}',
-  child: Image.asset(
-    d.image,
-    fit: BoxFit.cover,
-  ),
-),
+                Hero(
+                  tag: 'image-${d.nom}',
+                  child: Image.asset(
+                    d.image,
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 Positioned(
                   top: 40,
                   left: 16,
                   child: CircleAvatar(
                     backgroundColor: Colors.white,
                     child: IconButton(
-  tooltip: 'Retour',
-  onPressed: () => Navigator.pop(context),
-  icon: const Icon(Icons.arrow_back),
-),
+                      tooltip: 'Retour',
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(Icons.arrow_back),
+                    ),
                   ),
                 ),
                 const Positioned(
@@ -142,7 +141,6 @@ Future<void> _laisserAvis() async {
               ],
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.all(20),
             child: Column(
@@ -262,38 +260,38 @@ Future<void> _laisserAvis() async {
                     ),
                   ],
                 ),
-const SizedBox(height: 24),
-Row(
-  children: [
-    Expanded(
-      child: Text('Avis (${_avis.length})',
-          style: const TextStyle(
-              fontSize: 18, fontWeight: FontWeight.bold)),
-    ),
-    TextButton.icon(
-      onPressed: _laisserAvis,
-      icon: const Icon(Icons.rate_review_outlined),
-      label: const Text('Laisser un avis'),
-    ),
-  ],
-),
-if (_avis.isEmpty)
-  const Text('Soyez le premier à donner votre avis.')
-else
-  for (final a in _avis)
-    ListTile(
-      contentPadding: EdgeInsets.zero,
-      leading: CircleAvatar(child: Text(a.auteur[0].toUpperCase())),
-      title: Row(
-        children: [
-          Expanded(child: Text(a.auteur)),
-          for (int i = 1; i <= 5; i++)
-            Icon(i <= a.note ? Icons.star : Icons.star_border,
-                color: Colors.amber, size: 16),
-        ],
-      ),
-      subtitle: Text(a.commentaire),
-    ),
+                const SizedBox(height: 24),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text('Avis (${_avis.length})',
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold)),
+                    ),
+                    TextButton.icon(
+                      onPressed: _laisserAvis,
+                      icon: const Icon(Icons.rate_review_outlined),
+                      label: const Text('Laisser un avis'),
+                    ),
+                  ],
+                ),
+                if (_avis.isEmpty)
+                  const Text('Soyez le premier à donner votre avis.')
+                else
+                  for (final a in _avis)
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: CircleAvatar(child: Text(a.auteur[0].toUpperCase())),
+                      title: Row(
+                        children: [
+                          Expanded(child: Text(a.auteur)),
+                          for (int i = 1; i <= 5; i++)
+                            Icon(i <= a.note ? Icons.star : Icons.star_border,
+                                color: Colors.amber, size: 16),
+                        ],
+                      ),
+                      subtitle: Text(a.commentaire),
+                    ),
               ],
             ),
           ),
@@ -319,9 +317,9 @@ else
               const SizedBox(width: 20),
               Expanded(
                 child: FilledButton(
-  onPressed: _reserver,
-  child: const Text('Réserver'),
-),
+                  onPressed: _reserver,
+                  child: const Text('Réserver'),
+                ),
               ),
             ],
           ),
