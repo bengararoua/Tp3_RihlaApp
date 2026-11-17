@@ -35,3 +35,6 @@ Question1/palier4/tp5:On envoie uniquement l'identifiant pour alléger la charge
 Question2/palier4/tp5:Le serveur risque de ne pas comprendre le format des données envoyées et renverra une erreur
 Question3/palier4/tp5:on teste mounted après un await pour vérifier que le widget existe toujours avant d'utiliser son BuildContext ou de modifier son état.
 Question1/partie1/tp4:Si l'application est cassée sur la branche feature/favoris la branche main n'est pas affectée
+Question1/partie2/tp4:Parce que le bouton ne gère plus son propre état
+Question2/partie2/tp4:On stocke les favoris par ID pour garantir leur identification même après le rechargement des destinations depuis JSON Server. Les IDs restent les mêmes, contrairement aux instances des objets qui sont recréées en mémoire.
+Question3/partie2/tp4:Parce que les favoris sont stockés uniquement dans la mémoire vive 

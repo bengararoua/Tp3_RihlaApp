@@ -130,7 +130,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                   ),
                 ),
-                const Positioned(
+                Positioned( // <-- LE "const" A ÉTÉ SUPPRIMÉ ICI
                   top: 40,
                   right: 16,
                   child: CircleAvatar(
