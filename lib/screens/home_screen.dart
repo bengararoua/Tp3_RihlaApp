@@ -8,6 +8,9 @@ import 'package:rihla/widgets/search_box.dart';
 import 'package:rihla/widgets/section_title.dart';
 import '../services/api_service.dart';
 import 'mes_reservations_screen.dart';
+import 'favoris_screen.dart';
+import 'package:provider/provider.dart';
+import '../providers/favoris_model.dart'; 
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -117,10 +120,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final favorisModel = context.watch<FavorisModel>();
     return Scaffold(
       body: SafeArea(
         child: _onglet == 0
             ? _construireExplorer()
+              : _onglet == 1
+                ? const FavorisScreen()
             : _onglet == 2
                 ? const MesReservationsScreen()
                 : const Center(child: Text('Bientôt disponible')),
@@ -132,17 +138,25 @@ class _HomeScreenState extends State<HomeScreen> {
             _onglet = index;
           });
         },
-        destinations: const [
+        destinations:  [
           NavigationDestination(
             icon: Icon(Icons.explore_outlined),
             selectedIcon: Icon(Icons.explore),
             label: 'Explorer',
           ),
-          NavigationDestination(
-            icon: Icon(Icons.favorite_border),
-            selectedIcon: Icon(Icons.favorite),
-            label: 'Favoris',
-          ),
+NavigationDestination(
+  icon: Badge(
+    isLabelVisible: favorisModel.nombre > 0, 
+    label: Text('${favorisModel.nombre}'),
+    child: const Icon(Icons.favorite_border),
+  ),
+  selectedIcon: Badge(
+    isLabelVisible: favorisModel.nombre > 0,
+    label: Text('${favorisModel.nombre}'),
+    child: const Icon(Icons.favorite),
+  ),
+  label: 'Favoris',
+),
           NavigationDestination(
             icon: Icon(Icons.luggage_outlined),
             selectedIcon: Icon(Icons.luggage),

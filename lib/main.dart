@@ -2,10 +2,19 @@ import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'data/destinations.dart';
 import 'screens/detail_screen.dart';
+import 'package:provider/provider.dart';
+import 'providers/favoris_model.dart';
+
  
 void main() {
-  runApp(const RihlaApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => FavorisModel(),
+      child: const RihlaApp(),
+    ),
+  );
 }
+
  
 class RihlaApp extends StatelessWidget {
   const RihlaApp({super.key});
