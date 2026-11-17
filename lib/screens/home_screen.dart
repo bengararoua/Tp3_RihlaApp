@@ -160,7 +160,7 @@ NavigationDestination(
           NavigationDestination(
             icon: Icon(Icons.luggage_outlined),
             selectedIcon: Icon(Icons.luggage),
-            label: 'Voyages',
+            label: 'Réservations',
           ),
         ],
       ),
