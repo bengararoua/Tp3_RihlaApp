@@ -34,3 +34,4 @@ Question3/palier3/tp5:Non, le changement de catégorie ne déclenche pas de nouv
 Question1/palier4/tp5:On envoie uniquement l'identifiant pour alléger la charge réseau
 Question2/palier4/tp5:Le serveur risque de ne pas comprendre le format des données envoyées et renverra une erreur
 Question3/palier4/tp5:on teste mounted après un await pour vérifier que le widget existe toujours avant d'utiliser son BuildContext ou de modifier son état.
+Question1/partie1/tp4:Si l'application est cassée sur la branche feature/favoris la branche main n'est pas affectée
