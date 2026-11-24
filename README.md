@@ -34,7 +34,16 @@ Question3/palier3/tp5:Non, le changement de catégorie ne déclenche pas de nouv
 Question1/palier4/tp5:On envoie uniquement l'identifiant pour alléger la charge réseau
 Question2/palier4/tp5:Le serveur risque de ne pas comprendre le format des données envoyées et renverra une erreur
 Question3/palier4/tp5:on teste mounted après un await pour vérifier que le widget existe toujours avant d'utiliser son BuildContext ou de modifier son état.
-Question1/partie1/tp4:Si l'application est cassée sur la branche feature/favoris la branche main n'est pas affectée
-Question1/partie2/tp4:Parce que le bouton ne gère plus son propre état
-Question2/partie2/tp4:On stocke les favoris par ID pour garantir leur identification même après le rechargement des destinations depuis JSON Server. Les IDs restent les mêmes, contrairement aux instances des objets qui sont recréées en mémoire.
-Question3/partie2/tp4:Parce que les favoris sont stockés uniquement dans la mémoire vive 
+Question1/partie1/tp6:Si l'application est cassée sur la branche feature/favoris la branche main n'est pas affectée
+Question1/partie2/tp6:Parce que le bouton ne gère plus son propre état
+Question2/partie2/tp6:On stocke les favoris par ID pour garantir leur identification même après le rechargement des destinations depuis JSON Server. Les IDs restent les mêmes, contrairement aux instances des objets qui sont recréées en mémoire.
+Question3/partie2/tp6:Parce que les favoris sont stockés uniquement dans la mémoire vive 
+Question1/partie4/tp6:Parce que dans la Partie 3, seule la branche feature/favoris a été modifiée pour ajouter les nouvelles fonctionnalités
+Question2/partie4/tp6:Si on oublie de le supprimer, le conflit reste présent dans le fichier et le code peut devenir invalide
+Question 1/palier1/tp7:Parce que SharedPreferences ne stocke que des types de données simples
+Question2/palier1/tp7:FavorisModel() : crée une instance de FavorisModel et ..charger() : appelle la méthode charger() sur cette instance.et FavorisModel().charger() retourne void (aucune valeur)
+Question3/palier1/tp7:Parce que l'interface ne se mettrait pas à jour après le chargement asynchrone, laissant l'utilisateur devant une liste de favoris vide jusqu'à ce qu'il effectue une autre action.
+Suggestion de capilot/palier2/tp7:pour le Bouton de bascule du thème clair/sombre dans HomeHeader,le capilot Copilot suggére Utilisation des icônes Icons.wb_sunny et Icons.nightlight_round->Modifiée en Icons.light_mode et Icons.dark_mode 
+Question 1/palier3/tp4:On mémorise le cache uniquement après avoir vérifié statusCode == 200 afin de ne jamais enregistrer dans SharedPreferences un contenu d'erreur qui ne correspond pas à une vraie liste de destinations valides.
+Question2/palier3/tp4:Il voit l'écran d'erreur ErreurReseau.
+Question3/palier3/tp4:rethrow relance l'exception capturée afin de laisser un niveau supérieur la traiter.

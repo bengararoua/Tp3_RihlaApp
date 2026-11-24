@@ -10,7 +10,7 @@ import '../services/api_service.dart';
 import 'mes_reservations_screen.dart';
 import 'favoris_screen.dart';
 import 'package:provider/provider.dart';
-import '../providers/favoris_model.dart'; 
+import '../providers/favoris_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
           return const Center(child: CircularProgressIndicator());
         }
         // TODO 3 : erreur (snapshot.hasError) -> ErreurReseau(...)
- 
+
         if (snapshot.hasError) {
           return ErreurReseau(
             message: 'Impossible de charger les destinations.',
@@ -55,11 +55,43 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         }
         final destinations = snapshot.data!;
+        final theme = Theme.of(context);
+        final estSombre = theme.brightness == Brightness.dark;
 
         // Dans _construireExplorer, cas « données » :
-        return RefreshIndicator(
-          onRefresh: _recharger,
-          child: _construireAccueil(destinations),
+        return Column(
+          children: [
+            if (ApiService.depuisCache)
+              Container(
+                width: double.infinity,
+                color: estSombre ? Colors.amber.shade900 : Colors.amber.shade100,
+                padding: const EdgeInsets.all(8),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.wifi_off,
+                      size: 18,
+                      color: estSombre ? Colors.amber.shade100 : Colors.amber.shade900,
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Hors connexion : données enregistrées',
+                        style: TextStyle(
+                          color: estSombre ? Colors.amber.shade100 : Colors.amber.shade900,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            Expanded(
+              child: RefreshIndicator(
+                onRefresh: _recharger,
+                child: _construireAccueil(destinations),
+              ),
+            ),
+          ],
         );
       },
     );
@@ -125,11 +157,11 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: _onglet == 0
             ? _construireExplorer()
-              : _onglet == 1
-                ? const FavorisScreen()
+            : _onglet == 1
+            ? const FavorisScreen()
             : _onglet == 2
-                ? const MesReservationsScreen()
-                : const Center(child: Text('Bientôt disponible')),
+            ? const MesReservationsScreen()
+            : const Center(child: Text('Bientôt disponible')),
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _onglet,
@@ -138,25 +170,25 @@ class _HomeScreenState extends State<HomeScreen> {
             _onglet = index;
           });
         },
-        destinations:  [
+        destinations: [
           NavigationDestination(
             icon: Icon(Icons.explore_outlined),
             selectedIcon: Icon(Icons.explore),
             label: 'Explorer',
           ),
-NavigationDestination(
-  icon: Badge(
-    isLabelVisible: favorisModel.nombre > 0, 
-    label: Text('${favorisModel.nombre}'),
-    child: const Icon(Icons.favorite_border),
-  ),
-  selectedIcon: Badge(
-    isLabelVisible: favorisModel.nombre > 0,
-    label: Text('${favorisModel.nombre}'),
-    child: const Icon(Icons.favorite),
-  ),
-  label: 'Favoris',
-),
+          NavigationDestination(
+            icon: Badge(
+              isLabelVisible: favorisModel.nombre > 0,
+              label: Text('${favorisModel.nombre}'),
+              child: const Icon(Icons.favorite_border),
+            ),
+            selectedIcon: Badge(
+              isLabelVisible: favorisModel.nombre > 0,
+              label: Text('${favorisModel.nombre}'),
+              child: const Icon(Icons.favorite),
+            ),
+            label: 'Favoris',
+          ),
           NavigationDestination(
             icon: Icon(Icons.luggage_outlined),
             selectedIcon: Icon(Icons.luggage),
