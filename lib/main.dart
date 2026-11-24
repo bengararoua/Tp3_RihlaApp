@@ -8,10 +8,11 @@ import 'providers/favoris_model.dart';
  
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => FavorisModel(),
-      child: const RihlaApp(),
-    ),
+ChangeNotifierProvider(
+  create: (_) => FavorisModel()..charger(),
+  child: const RihlaApp(),
+)
+
   );
 }
 

@@ -22,18 +22,32 @@ class Destination {
     required this.duree,
     required this.description,
   });
+  
   factory Destination.fromJson(Map<String, dynamic> json) {
     return Destination(
-    id: json['id'].toString(),
-    nom: json['nom'] as String,
-    region: json['region'].toString(),
-    categorie: json['categorie'] as String,
-    image: json['image'].toString(),
-    note: (json['note'] as num).toDouble(), 
-    prix: json['prix'] as int,           
-    duree: json['duree'] as String,
-    description: json['description'] as String,
-  );
+      id: json['id'].toString(),
+      nom: json['nom'] as String,
+      region: json['region'].toString(),
+      categorie: json['categorie'] as String,
+      image: json['image'].toString(),
+      note: (json['note'] as num).toDouble(), 
+      prix: json['prix'] as int,           
+      duree: json['duree'] as String,
+      description: json['description'] as String,
+    );
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'nom': nom,
+      'region': region,
+      'categorie': categorie,
+      'image': image,
+      'note': note,
+      'prix': prix,
+      'duree': duree,
+      'description': description,
+    };
+  }
 }
