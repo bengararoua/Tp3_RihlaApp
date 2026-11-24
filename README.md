@@ -44,3 +44,6 @@ Question 1/palier1/tp7:Parce que SharedPreferences ne stocke que des types de do
 Question2/palier1/tp7:FavorisModel() : crée une instance de FavorisModel et ..charger() : appelle la méthode charger() sur cette instance.et FavorisModel().charger() retourne void (aucune valeur)
 Question3/palier1/tp7:Parce que l'interface ne se mettrait pas à jour après le chargement asynchrone, laissant l'utilisateur devant une liste de favoris vide jusqu'à ce qu'il effectue une autre action.
 Suggestion de capilot/palier2/tp7:pour le Bouton de bascule du thème clair/sombre dans HomeHeader,le capilot Copilot suggére Utilisation des icônes Icons.wb_sunny et Icons.nightlight_round->Modifiée en Icons.light_mode et Icons.dark_mode 
+Question 1/palier3/tp4:On mémorise le cache uniquement après avoir vérifié statusCode == 200 afin de ne jamais enregistrer dans SharedPreferences un contenu d'erreur qui ne correspond pas à une vraie liste de destinations valides.
+Question2/palier3/tp4:Il voit l'écran d'erreur ErreurReseau.
+Question3/palier3/tp4:rethrow relance l'exception capturée afin de laisser un niveau supérieur la traiter.
